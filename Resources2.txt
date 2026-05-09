@@ -1,6 +1,9 @@
 - Connect Python Scripts To Internet With Ngrok
 https://www.youtube.com/watch?v=hs7GLsHQCPQ
 
+- Duo Labs Python Guide for WebAuthn
+https://github.com/duo-labs/py_webauthn
+
 - FastAPI Full Crash Course - Python’s Fastest Web Framework
 https://www.youtube.com/watch?v=rvFsGRvj9jo
 
