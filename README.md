@@ -1,6 +1,6 @@
-# WebAuthn Secure Identity Management System
+# Passwordless Web-service authentication
 
-A passwordless authentication implementation leveraging the **FIDO2/WebAuthn** protocol. This system replaces traditional password-based login with hardware-bound, public-key cryptography, ensuring high-level security against phishing and credential stuffing.
+A passwordless authentication implementation leveraging the **WebAuthn.io** flow. This system replaces traditional credential (password) based login with public-key cryptography, ensuring high-level security so that server no longer becomes a target, phishing and weak/reusing passwords.
 
 ## ✨ Features
 - **Biometric Authentication:** Supports Windows Hello, TouchID, and FaceID.
