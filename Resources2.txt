@@ -1,0 +1,11 @@
+- Connect Python Scripts To Internet With Ngrok
+https://www.youtube.com/watch?v=hs7GLsHQCPQ
+
+- FastAPI Full Crash Course - Python’s Fastest Web Framework
+https://www.youtube.com/watch?v=rvFsGRvj9jo
+
+- SimpleWebAuthn project
+https://simplewebauthn.dev/docs/
+
+- WebAuthn Guide
+https://webauthn.guide/

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WebAuthn Passwordless Login</title>
+    <script src="https://unpkg.com/@simplewebauthn/browser/dist/bundle/index.umd.min.js"></script>
+</head>
+<body style="font-family: sans-serif; padding: 20px;">
+    <h2>WebAuthn Registration</h2>
+    <input type="text" id="username" placeholder="Enter Username">
+    <button onclick="register()">Register</button>
+    <button onclick="authenticate()">Authenticate</button>
+    <p id="status"></p>
+
+    <script>
+        const { startRegistration, startAuthentication } = SimpleWebAuthnBrowser;
+
+        async function register() {
+            const username = document.getElementById('username').value;
+            const status = document.getElementById('status');
+            
+            if (!username) { status.innerText = "Please enter a username"; return; }
+            status.innerText = "Fetching options...";
+
+            try {
+                // Options from FastAPI server
+                const resp = await fetch(`/register/options?username=${username}`);
+                const optionsJSON = await resp.json();
+
+                status.innerText = "Please scan your fingerprint...";
+                const registrationResponse = await startRegistration(optionsJSON);
+
+                // Send hardware response back to server
+                status.innerText = "Verifying with server...";
+                const verifyResp = await fetch(`/register/verify?username=${username}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(registrationResponse),
+                });
+
+                const result = await verifyResp.json();
+                if (result.status === 'ok') {
+                    status.innerText = "✅ Success! Registered on this browser.";
+                } else {
+                    status.innerText = "❌ Error: " + result.message;
+                }
+            } catch (err) {
+                console.error(err);
+                status.innerText = "❌ Failed: " + err.message;
+            }
+        }
+
+
+        async function authenticate() {
+            const username = document.getElementById('username').value;
+            const status = document.getElementById('status');
+            if (!username) { status.innerText = "Enter username"; return; }
+
+            try {
+                // 1. Get Login Options
+                const resp = await fetch(`/login/options?username=${username}`);
+                
+                if (!resp.ok) {
+                    const errorData = await resp.json();
+                    status.innerText = "❌ " + errorData.message;
+                    return;
+                }
+                
+                const options = await resp.json();
+
+                // 2. Trigger Biometric Scan
+                const authResp = await startAuthentication(options);
+
+                // 3. Verify with Server
+                const verifyResp = await fetch(`/login/verify?username=${username}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(authResp),
+                });
+
+                const result = await verifyResp.json();
+                status.innerText = result.status === 'ok' ? "✅ Login Successful!" : "❌ " + result.message;
+            } catch (err) {
+                status.innerText = "❌ Login Failed: " + err.message;
+            }
+        }
+
+    </script>
+</body>
+</html>
