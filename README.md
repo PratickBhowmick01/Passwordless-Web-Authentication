@@ -1,6 +1,6 @@
 # Passwordless Web-service authentication
 
-A passwordless authentication implementation leveraging the **WebAuthn.io** flow. This system replaces traditional credential (password) based login with public-key cryptography, ensuring high-level security so that server no longer becomes a target, phishing and weak/reusing passwords.
+A passwordless authentication implementation leveraging the **WebAuthn.io** flow. This system replaces traditional credential (password) based login with public-key cryptography, ensuring high-level security so that server no longer becomes a target, prevents phishing and avoids weak/reusing passwords.
 
 ## ✨ Features
 - **Biometric Authentication:** Supports Windows Hello, TouchID, and FaceID.
