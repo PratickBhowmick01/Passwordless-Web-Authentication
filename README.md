@@ -18,5 +18,17 @@ A passwordless authentication implementation leveraging the **WebAuthn.io** flow
 
 1. **Clone the repository:**
    ```bash
-   git clone <your-repo-link>
-   cd secure-identity-system
+   git clone https://github.com/PratickBhowmick01/Passwordless-Web-Authentication/tree/main
+   cd Codes
+   
+2. **Install Dependencies:**
+   ```bash
+   pip install fastapi uvicorn webauthn 
+
+3. **Configurations:**
+   ```bash
+   # main.py
+   RP_ID = "your-unique-id.ngrok-free.app"
+   ORIGIN = "https://your-unique-id.ngrok-free.app"
+
+4. 
