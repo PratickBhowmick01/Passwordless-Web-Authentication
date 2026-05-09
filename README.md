@@ -31,4 +31,12 @@ A passwordless authentication implementation leveraging the **WebAuthn.io** flow
    RP_ID = "your-unique-id.ngrok-free.app"
    ORIGIN = "https://your-unique-id.ngrok-free.app"
 
-4. 
+4. **Launch the application:**
+   ```bash
+   # Terminal 1
+   uvicorn main:api --port 9999
+
+   # Terminal 2
+   ngrok http 9999
+
+   
